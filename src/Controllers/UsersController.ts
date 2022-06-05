@@ -6,9 +6,20 @@ const yup = require("yup");
 class UsersController {
 
   list(request: Request, response: Response) {
-    response.status(200).json({
-      message: 'Welcome to the UserController! Existent users can be listed here.(But not yet)',
-    });
+
+    try {
+      
+      const users = User.find({});
+      return response.status(200).json({ success: true, data: users });
+
+    } catch (error: any) {
+
+      return response.status(400).json({
+        success: false,
+        error: error.message,
+      });
+      
+    }
   }
 
   async create(request: Request, response: Response) {
