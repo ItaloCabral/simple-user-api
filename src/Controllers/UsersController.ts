@@ -5,11 +5,11 @@ const yup = require("yup");
 
 class UsersController {
 
-  list(request: Request, response: Response) {
+  async list(request: Request, response: Response) {
 
     try {
       
-      const users = User.find({});
+      const users = await User.find({});
       return response.status(200).json({ success: true, data: users });
 
     } catch (error: any) {
@@ -18,7 +18,7 @@ class UsersController {
         success: false,
         error: error.message,
       });
-      
+
     }
   }
 
